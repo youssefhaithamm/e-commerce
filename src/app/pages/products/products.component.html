@@ -1,0 +1,44 @@
+<section>
+
+    <h2 class="py-8 text-center text-4xl ">Products</h2>
+
+    <div class="mb-10">
+        <input [(ngModel)]="text" type="search" id="default-input" placeholder="Search by Name..." class="bg-gray-50 border w-[75%] mx-auto border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block p-2.5 ">
+    </div>
+
+    <div class="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-10">
+        @for (product of products() | search : text ; track product.id) {
+        <div
+            class=" card border hover:border-green-500/50 rounded-md overflow-hidden shadow hover:scale-[1.1] relative transition-all">
+            <div [routerLink]="['/details',product.id]">
+                <div class="card-img">
+                    <img [src]="product.imageCover" class="w-full h-[250px] object-contain" [alt]="product.title">
+                </div>
+                <div class="card-body px-2 pt-4">
+                    <h4 class="text text-green-500 text-xs"> {{product.category.name}}</h4>
+                    <h3 class="font-medium"> {{product.title.split(" ",2).join(' ')}}</h3>
+                    <div class="flex justify-between items-center">
+                        <span>{{product.price}} EGP</span>
+                        <div class="flex items-center">
+                            @for (num of [1,2,3,4,5].slice(0, product.ratingsAverage); track $index) {
+
+                            <span><i class="fas fa-star text-yellow-300"></i></span>
+                            }
+                            @if(product.ratingsAverage %1 !==0){
+                            <span><i class="fa-solid fa-star-half-stroke text-yellow-300"></i></span>
+
+                            }
+                            <span class="text-gray-500 ps">{{product.ratingsAverage}}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="relative pb-4 z-30">
+                <i #heartIcon (click)="addToWish(product.id)" [class]="isProductInWishlist(product.id) ? 'fas fa-heart text-red-500' : 'far fa-heart text-blck'" class="fa-solid fa-heart text-2xl absolute top-0 right-2"></i>
+              </div>
+            <button (click)="addToCart(product.id)"class="bg-green-600 text-white py-2 px-10 border rounded w-[90%] mx-auto block">Add To Card</button>
+        </div>
+        }
+
+    </div>
+</section>

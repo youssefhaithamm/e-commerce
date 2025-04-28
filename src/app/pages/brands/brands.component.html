@@ -1,0 +1,43 @@
+<section>
+
+    <h2 class="py-8 text-center text-4xl border-b border-gray-300 my-5">Brands</h2>
+    <div class="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-10">
+        @for (brand of brands(); track brand._id) {
+        <div (click)="currentItem(brand);toggelightBox()"
+            class=" card border hover:border-green-500/50 rounded-md overflow-hidden shadow hover:scale-[1.1] relative transition-all">
+            <div>
+                <div class="card-img">
+                    <img [src]="brand.image" class="w-full h-[250px] object-contain" [alt]="brand.name">
+                </div>
+                <div class="card-body px-2 py-4">
+                    <h4 class="text text-gray-500 text-md text-center"> {{brand.name}}</h4>
+                </div>
+            </div>
+        </div>
+
+        }
+
+    </div>
+
+    @if(isToggelLightBox){
+    <div class="lightBox ">
+
+        <div (click)="toggelightBox()"
+            class="card flex justify-center items-center border rounded-md overflow-hidden  transition-all fixed top-0 left-0 bottom-0 right-0 bg-[rgba(0,0,0,0.4)]">
+            <div (click)="stopPop($event)" class=" flex justify-between items-center bg-white">
+
+                <div class="card-body px-2 py-4">
+                    <h4 class="text text-green-600 text-2xl"> {{currentData.name}}</h4>
+                </div>
+                <div class="card-img">
+                    <img [src]="currentData.image" class="w-full h-[250px] object-contain" [alt]="currentData.name">
+                </div>
+            </div>
+        </div>
+
+
+
+    </div>
+
+    }
+</section>

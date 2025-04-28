@@ -1,0 +1,23 @@
+<section>
+
+    <h2 class="py-8 text-center text-4xl border-b border-gray-300 my-5"> Category</h2>
+    <div class="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-10">
+        @for (cat of categories(); track cat._id) {
+        <div
+            class=" card border hover:border-green-500/50 rounded-md overflow-hidden shadow hover:scale-[1.1] relative transition-all">
+            <div>
+                <div class="card-img">
+                    <img [src]="cat.image" class="w-full h-[250px] object-contain" [alt]="cat.name">
+                </div>
+                <div class="card-body px-2 py-4">
+                    <h4 class="text text-green-500 text-md"> {{cat.name}}</h4>
+                </div>
+            </div>
+        </div>
+
+        }
+
+    </div>
+
+  
+</section>

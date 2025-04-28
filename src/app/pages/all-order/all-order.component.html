@@ -1,0 +1,62 @@
+<section >  
+
+
+
+    <h2 class="py-8 text-center text-4xl border-b border-gray-300 ">All Order</h2>
+
+    <div class="sm:w-[100] md:w-[75%] mx-auto bg-gray-100 rounded p-4 border shadow my-8 border-y-green-200">
+
+    @for (order of orderData; track $index) {
+   
+
+       
+
+        <h2 class="text-2xl">Oder: {{$index +1}}</h2>
+    
+            
+        @for (item of order.cartItems; track $index) {
+            
+            <div class=" card border rounded-md overflow-hidden shadow flex flex-wrap justify-between items-center bg-white  py-5">
+        
+            <div class="card-img flex flex-wrap justify-center items-center sm:w-full md:w-[40%]">
+               <div>
+                <img [src]="item.product.imageCover" class="w-full h-[250px] object-contain" [alt]="item.product.title">
+               </div>
+                <div class="card-body px-2 py-4">
+                    <h4 class="text text-green-500 text-xs"> {{item.product.category.name}}</h4>
+                    <h3 class="font-medium"> {{item.product.title.split(" ",2).join(' ')}}</h3>
+                   
+                    
+                </div>
+                
+            </div>
+            <div class="sm:w-full md:w-[30%] md:ms-auto">
+                <h3> brand:<span class="text-green-600 ps-2">{{item.product.brand.name}}</span></h3>
+                <h3>Count of the product:<span  class="text-green-600 ps-2">{{item.count}}</span></h3>
+               
+            </div>
+          
+            <div class=" sm:w-full md:w-[30%] flex flex-col justify-center items-center space-y-3 border-b border-gray-300">
+                <span class="border border-gray-300 py-2 px-4 ">Price: {{item.price}} EGP</span>
+                <div class="flex items-center">
+                    @for (num of [1,2,3,4,5].slice(0, item.product.ratingsAverage); track $index) {
+
+                    <span><i class="fas fa-star text-yellow-300"></i></span>
+                    }
+                    @if(item.product.ratingsAverage %1 !==0){
+                    <span><i class="fa-solid fa-star-half-stroke text-yellow-300"></i></span>
+                    }
+                    <span class="text-gray-500 ps ">{{item.product.ratingsAverage}}</span>
+                </div>
+            </div>
+            
+
+            </div>
+        }
+   
+   
+    }
+</div>
+
+
+</section>

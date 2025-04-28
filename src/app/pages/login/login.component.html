@@ -1,0 +1,111 @@
+<section class=" md:w-1/2 mx-auto bg-gray-50 rounded p-4 border shadow">
+    <h1 class="text-3xl font-light text-center text-green-600">
+        Login Now
+    </h1>
+
+    <form [formGroup]="loginForm" (ngSubmit)="submitForm()">
+       
+        <div class="mb-1">
+            @let emailControl=loginForm.get('email');
+            <label for="email" class="block mb-2 text-sm font-medium text-gray-900 ">Email</label>
+            <input formControlName="email" type="email" id="email"
+                class="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 ">
+
+            @if(emailControl?.errors &&emailControl?.touched ){
+            <div class="flex p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 "
+                role="alert">
+                <svg class="shrink-0 inline w-4 h-4 me-3 mt-[2px]" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                    fill="currentColor" viewBox="0 0 20 20">
+                    <path
+                        d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z" />
+                </svg>
+                <span class="sr-only">Danger</span>
+                <div>
+                    <ul class="mt-1.5 list-disc list-inside">
+                        @if(emailControl?.getError("required")){
+                        <li>Email is Required</li>
+                        }
+                        @else if(emailControl?.getError("email")){
+                        <li>Entar Valid Email</li>
+                        }
+
+
+                    </ul>
+                </div>
+            </div>
+            }
+
+
+
+        </div>
+        <div class="mb-1">
+            @let passwordControl=loginForm.get('password');
+            <label for="password" class="block mb-2 text-sm font-medium text-gray-900 ">Password</label>
+            <input formControlName="password" type="password" id="password"
+                class="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 ">
+            @if(passwordControl?.errors &&passwordControl?.touched ){
+            <div class="flex p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 "
+                role="alert">
+                <svg class="shrink-0 inline w-4 h-4 me-3 mt-[2px]" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                    fill="currentColor" viewBox="0 0 20 20">
+                    <path
+                        d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z" />
+                </svg>
+                <span class="sr-only">Danger</span>
+                <div>
+                    <ul class="mt-1.5 list-disc list-inside">
+                        @if(passwordControl?.getError("required")){
+                        <li>Password is Required</li>
+                        }
+                        @else if(passwordControl?.getError("pattern")){
+                        <li> must start with a capital letter and be more than 7 characters long</li>
+                        }
+
+
+                    </ul>
+                </div>
+            </div>
+            }
+        </div>
+
+        <div class="flex items-center justify-end gap-4 mt-2">
+           <div >
+            <a routerLink="/forgot" routerLinkActive="router-link-active"  role="button" class="link-success text-green-700 underline hover:text-green-500 hover:underline" >Forgot Password</a>
+           </div>
+           <div>
+            <button [disabled]="isloading" type="submit" class=" btn-main ms-auto">SignIn
+                @if(isloading){
+                <span><i class="fas fa-spin fa-spinner"></i></span>
+                }
+            </button>
+           </div>
+        </div>
+      
+        @if(isSuccess){
+            <div class="p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50 " role="alert">
+                <span class="font-medium">{{isSuccess}}</span>
+              </div>
+              
+        }
+
+        @if(msError){
+            <div class="flex p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 "
+            role="alert">
+            <svg class="shrink-0 inline w-4 h-4 me-3 mt-[2px]" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                fill="currentColor" viewBox="0 0 20 20">
+                <path
+                    d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z" />
+            </svg>
+            <span class="sr-only">Danger</span>
+            <div>
+                <ul class="mt-1.5 list-disc list-inside">
+                    <li>{{msError}}</li>
+                </ul>
+            </div>
+        </div>
+        }
+
+
+
+    </form>
+</section>

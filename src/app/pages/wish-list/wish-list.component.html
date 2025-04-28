@@ -1,0 +1,37 @@
+
+
+    <section class="w-full md:w-[75%] mx-auto bg-white rounded p-4 border shadow my-8 border-y-green-200 ">
+        <h1 class="text-green-600 text-center text-3xl py-4 border-b ">Wish List</h1>
+    
+        <div class=" bg-gray-50  p-8 ">
+          
+    
+          @for (product of wishData; track product.id) {
+            <div class="grid md:grid-cols-[10%_minmax(0,1fr)] border-b mb-2">
+                <div class="mt-3">
+                    <img [src]="product.imageCover" class=" w-full" [alt]="product.title">
+            
+                </div>
+                <div class="flex justify-between items-center">
+                    <div class="ms-4">
+                        <h3> {{product.title.split(" ",2).join(' ')}}</h3>
+                        <h4 class="text-green-600">{{product.price }} EGP</h4>
+                        <button (click)="removeItem(product.id)" class="my-3 text-red-800 p-2 rounded"><i class="fas fa-trash-can me-2"></i>Remove</button>
+    
+                    
+    
+                    </div>
+                   
+                    <div class="flex justify-center items-center gap-3">
+                        
+                        <button (click)="addToCart(product.id)"class="text-green-600  border-green-500 py-2 px-10 border rounded  block">Add To Card</button>
+
+                    </div>
+    
+                </div>
+            </div>
+          }
+         
+    
+        </div>
+    </section>
